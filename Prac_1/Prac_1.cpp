@@ -57,8 +57,8 @@ int main()
 	cout << "\n" << "Двоичное представление числа " << chislo_float << " : \n";
 	kol_razryadov = sizeof(chislo_float) * 8; // Обновляем количество разрядов
 	maska = 1 << kol_razryadov - 1; // Обновляем маску
-	cout << "\n" << "  |<--------Мантисса------->|<Порядок>|\n";
-	for (i = 0; i < kol_razryadov-1; i += 1)
+	cout << "\n" << " |<Порядок>|<-------Мантисса------>|\n";
+	for (i = 0; i < kol_razryadov; i += 1)
 	{
 		putchar(chislo_3 & maska ? '1' : '0');
 		chislo_3 <<= 1;
