@@ -272,4 +272,3 @@ int main() {
         Matrix[i] = new int[Size];
     Menu(Matrix, Size);
 }
-
