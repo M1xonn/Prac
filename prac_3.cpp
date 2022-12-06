@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <iomanip>
 #include <windows.h>
 using namespace std;
@@ -24,42 +24,42 @@ void EmptyMatrix(int** Matrix, int Size) {
 
 void SpiralMatrix(int** Matrix, int Size) {
     EmptyMatrix(Matrix, Size);
-    int LineSize = 0;
-    for (int j = 0; j < Size / 2; j++) {
-        for (int i = LineSize; i < Size - LineSize; i++) {
-            Matrix[LineSize][i] = rand() % (Size * Size) + 1;
+    int LineNumber = 0;
+    for (int LineSize = 0; LineSize < Size / 2; LineSize++) {
+        for (int i = LineNumber; i < Size - LineNumber; i++) {
+            Matrix[LineNumber][i] = rand() % (Size * Size) + 1;
             system("cls");
             PrintMatrix(Matrix, Size);
         }
-        for (int i = LineSize + 1; i < Size - LineSize; i++) {
-            Matrix[i][Size - LineSize - 1] = rand() % (Size * Size) + 1;
+        for (int i = LineNumber + 1; i < Size - LineNumber; i++) {
+            Matrix[i][Size - LineNumber - 1] = rand() % (Size * Size) + 1;
             system("cls");
             PrintMatrix(Matrix, Size);
         }
-        for (int i = Size - LineSize - 2; i >= LineSize; i--) {
-            Matrix[Size - LineSize - 1][i] = rand() % (Size * Size) + 1;
+        for (int i = Size - LineNumber - 2; i >= LineNumber; i--) {
+            Matrix[Size - LineNumber - 1][i] = rand() % (Size * Size) + 1;
             system("cls");
             PrintMatrix(Matrix, Size);
         }
-        for (int i = Size - LineSize - 2; i > LineSize; i--) {
-            Matrix[i][LineSize] = rand() % (Size * Size) + 1;
+        for (int i = Size - LineNumber - 2; i > LineNumber; i--) {
+            Matrix[i][LineNumber] = rand() % (Size * Size) + 1;
             system("cls");
             PrintMatrix(Matrix, Size);
         }
-        LineSize++;
+        LineNumber++;
     }
 }
 
 void SnakeMatrix(int** Matrix, int Size) {
     EmptyMatrix(Matrix, Size);
-    for (int LineSize = 0; LineSize < Size / 2; LineSize++) {
-        for (int i = 0; i < Size; i++) {
-            Matrix[i][LineSize * 2] = rand() % (Size * Size) + 1;
+    for (int LineNumber = 0; LineNumber < Size / 2; LineNumber++) {
+        for (int** i = Matrix; i <= (Matrix + Size - 1); i++) {
+            *(*i + LineNumber * 2) = rand() % (Size * Size) + 1;
             system("cls");
             PrintMatrix(Matrix, Size);
         }
-        for (int i = Size - 1; i >= 0; i--) {
-            Matrix[i][LineSize * 2 + 1] = rand() % (Size * Size) + 1;
+        for (int** i = Matrix + Size - 1; i >= Matrix; i--) {
+            *(*i + LineNumber * 2 + 1) = rand() % (Size * Size) + 1;
             system("cls");
             PrintMatrix(Matrix, Size);
         }
@@ -116,9 +116,9 @@ void RotateMatrix(int** Matrix, int Size) {
                 New_Matrix[i][j + Size / 2] = Matrix[i][j];
                 New_Matrix[i + Size / 2][j + Size / 2] = Matrix[i + Size / 2][j];
                 New_Matrix[i + Size / 2][j] = Matrix[i + Size / 2][j + Size / 2];
-                Matrix = New_Matrix;
-                PrintMatrix(Matrix, Size);
             }
+        Matrix = New_Matrix;
+        PrintMatrix(Matrix, Size);
     }
 }
 
