@@ -7,20 +7,24 @@ using namespace std;
 // thErE      are a nUmbEr                 of traditions.. For423 weDDiNgs,,,,,,,,, tHat hAve7567 sUrvIved Into tHe 21st cEntury......
 
 void StrInput(string& str) {
-    
+
     ifstream File(R"(C:\Программирование\4_прак\Test.txt)");
     if (!File.is_open()) {
         cout << "Файл не открыт";
     }
     string str2;
-    while (!File.eof()) 
+    while (!File.eof())
         getline(File, str);
     cout << "Введённая строка:" << '\n';
     cout << str << '\n';
     File.close();
 }
 
-void DeleteSymbols(string& str, char Symbol){
+void StrCin(string& str) {
+    getline(cin, str);
+}
+
+void DeleteSymbols(string& str, char Symbol) {
     int Len = str.length();
     for (int i = 0; i < Len; i++)
     {
@@ -87,10 +91,11 @@ void DeleteNumbers(string& str, int& i) {
 void UppercaseLetters(string str) {
     int Len = str.length();
     bool space = false;
-    for (int i = 0; i < Len-1; i++) {
+    for (int i = 0; i < Len - 1; i++) {
         if (str[i] == ' ')
             str[i + 1] = toupper(str[i + 1]);
     }
+    str[0] = toupper(str[0]);
     cout << str << '\n';
 }
 
@@ -104,7 +109,7 @@ void LinearSearch(string str) {
     int Len = str.length();
     int LenSub = Substring.length();
     string str2;
-    bool flag=false;
+    bool flag = false;
     for (int i = 0; i < Len - LenSub + 1; i++) {
         int j = i, cnt = 0;
         str2.clear();
@@ -114,7 +119,7 @@ void LinearSearch(string str) {
             cnt++;
         }
         if (str2 == Substring) {
-            for (int k = i; k <j; k++)
+            for (int k = i; k < j; k++)
                 str[k] = toupper(str[k]);
             flag = true;
         }
@@ -143,7 +148,7 @@ void Task3(string& str) {
     cout << "Исходная строка:" << '\n';
     cout << str << '\n';
     cout << "Слова из строки, не содержащие цифры:" << '\n';
-    for (int i = 0; i < str.length(); i++){
+    for (int i = 0; i < str.length(); i++) {
         DeleteNumbers(str, i);
     }
     cout << '\n';
@@ -161,7 +166,6 @@ void Task4(string& str) {
 void PrintMenu4() {
     system("cls");
     cout << "Что выхотите сделать?" << '\n';
-    cout << "1. Заполнить строку" << '\n';
     cout << "2. Отформатировать строку" << '\n';
     cout << "3. Слова не содержащие цифры" << '\n';
     cout << "4. Строка со словами с заглавной буквы" << '\n';
@@ -175,21 +179,6 @@ void Menu4(string& str) {
         PrintMenu4();
         cin >> Variant;
         switch (Variant) {
-        case 1:
-            char perm;
-            cout << "Ввести строку с файла или с клавиатуры(a или b)" << '\n';
-            cin >> perm;
-            while (perm != 'a' and perm != 'b') {
-                cout << "Неверно введён вид вывода, попробуйте снова: ";
-                cin >> perm;
-            }
-            if (perm == 'a')
-                StrInput(str);
-            else {
-                cout << "Введите строку:" << '\n';
-                getline(cin, str);
-            }
-            break;
         case 2:
             cout << "Исходная строка:" << '\n';
             cout << str;
@@ -215,6 +204,20 @@ void Menu4(string& str) {
 
 int main() {
     setlocale(0, "");
-	string str;
+    string str;
+    string perm;
+    cout << "Ввести строку с файла или с клавиатуры(a или b)" << '\n';
+    getline(cin, perm);
+    while (perm != "a" and perm != "b") {
+        cout << "Неверно введён вид вывода, попробуйте снова: ";
+        getline(cin, perm);
+    }
+    if (perm == "a")
+        StrInput(str);
+    else {
+        cout << "Введите строку:" << '\n';
+        getline(cin, str);
+    }
+    system("pause");
     Menu4(str);
 }
