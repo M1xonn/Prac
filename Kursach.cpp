@@ -1,10 +1,11 @@
-﻿#include <iostream>
+#include <iostream>
 #include <iomanip>
 #include <windows.h>
 #include <ctime>
 #include <string>
 #include <chrono>
 #include <fstream>
+#include <conio.h>
 using namespace std;
 
 void Task1() {
@@ -43,7 +44,6 @@ void Task1() {
         if (i % (kol_razryadov - 1) == 0)
             putchar(' ');
     }
-    cout << &chislo;
 
     cout << "\n\n" << "Задание 3" << "\n\n";
     cout << "Введите число float: ";
@@ -551,14 +551,14 @@ void Menu3(int** Matrix, int Size) {
         cin >> Variant;
         switch (Variant) {
         case 1:
-            char perm;
+            char perms;
             cout << "В каком виде вывести матрицу?(a или b)" << '\n';
-            cin >> perm;
-            while (perm != 'a' and perm != 'b') {
+            cin >> perms;
+            while (perms != 'a' and perms != 'b') {
                 cout << "Неверно введён вид вывода, попробуйте снова: ";
-                cin >> perm;
+                cin >> perms;
             }
-            if (perm == 'a')
+            if (perms == 'a')
                 SpiralMatrix(Matrix, Size);
             else
                 SnakeMatrix(Matrix, Size);
@@ -770,7 +770,6 @@ void Task4(string& str) {
 void PrintMenu4() {
     system("cls");
     cout << "Что выхотите сделать?" << '\n';
-    cout << "1. Заполнить строку" << '\n';
     cout << "2. Отформатировать строку" << '\n';
     cout << "3. Слова не содержащие цифры" << '\n';
     cout << "4. Строка со словами с заглавной буквы" << '\n';
@@ -784,21 +783,6 @@ void Menu4(string& str) {
         PrintMenu4();
         cin >> Variant;
         switch (Variant) {
-        case 1:
-            char perm;
-            cout << "Ввести строку с файла или с клавиатуры(a или b)" << '\n';
-            cin >> perm;
-            while (perm != 'a' and perm != 'b') {
-                cout << "Неверно введён вид вывода, попробуйте снова: ";
-                cin >> perm;
-            }
-            if (perm == 'a')
-                StrInput(str);
-            else {
-                cout << "Введите строку:" << '\n';
-                getline(cin, str);
-            }
-            break;
         case 2:
             Task2(str);
             cout << '\n' << "Отформатированная строка" << '\n';
@@ -822,6 +806,20 @@ void Menu4(string& str) {
 void TaskPrac4() {
     setlocale(0, "");
     string str;
+    string perm;
+    cout << "Ввести строку с файла или с клавиатуры(a или b)" << '\n';
+    getline(cin, perm);
+    while (perm != "a" and perm != "b") {
+        cout << "Неверно введён вид вывода, попробуйте снова: ";
+        getline(cin, perm);
+    }
+    if (perm == "a")
+        StrInput(str);
+    else {
+        cout << "Введите строку:" << '\n';
+        getline(cin, str);
+    }
+    system("pause");
     Menu4(str);
 }
 
